@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carta para Mamá</title>
+  <style>
+    :root {
+      --clr-envelope: #d63384;
+      --clr-flap: #f06292;
+      --clr-bg: #ffe6f0;
+      --duration: 1s;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--clr-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .envelope-container {
+      width: 500px;
+      height: 420px;
+      perspective: 1000px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .envelope {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background-color: var(--clr-envelope);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background-color: var(--clr-flap);
+      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      transform-origin: top center;
+      transform: rotateX(0deg);
+      transition: transform var(--duration) ease-in-out;
+      z-index: 3;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(-180deg);
+    }
+
+    .letter {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      padding: 30px 25px;
+      box-sizing: border-box;
+      text-align: center;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out 0.5s;
+      z-index: 2;
+    }
+
+    .envelope.open .letter {
+      opacity: 1;
+    }
+
+    .letter h1 {
+      color: var(--clr-envelope);
+      margin-bottom: 15px;
+    }
+
+    .letter p {
+      font-size: 1.1rem;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .signature {
+      margin-top: 20px;
+      font-style: italic;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<div class="envelope-container" onclick="openEnvelope()">
+  <div class="envelope" id="envelope">
+    <div class="flap"></div>
+    <div class="letter">
+      <h1>💖 ¡Feliz Día de la Madre! 💖</h1>
+      <p>
+        Querida mamá,<br><br>
+        Del cielo cayo una rosa, mi madre la recogio, se la puso en la cabeza
+        y que linda le quedo.
+        Gracias por cada abrazo, cada palabra y cada sonrisa. 
+        Eres el corazón de esta familia y nuestra mayor inspiración.<br><br>
+        ¡Te amamos muchísimo!
+      </p>
+      <p class="signature">
+        Con cariño,<br>
+        Paolo y Mariel
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openEnvelope() {
+    document.getElementById("envelope").classList.add("open");
+  }
+</script>
+
+</body>
+</html>
